@@ -4,3 +4,6 @@ global using MediatR;
 global using Marten;
 global using BuildingBlocks.CQRS;
 global using Catalog.API.Models;
+global using System.Collections;
+global using Marten.Linq.QueryHandlers;
+global using Catalog.API.Exceptions;

@@ -1,5 +1,8 @@
-﻿namespace Catalog.API.Models
+﻿using Marten.Schema;
+
+namespace Catalog.API.Models
 {
+    [DocumentAlias("Products")]
     public class Product
     {
         public Guid Id { get; set; }
