@@ -6,8 +6,8 @@ namespace EFCore_Model.Models
     {
         [Key]
         public int IDBook { get; set; }
-        public string Title { get; set; }
-        public string ISBN { get; set; }
-        public double Price { get; set; }
+        public string? Title { get; set; }
+        public string? ISBN { get; set; } = "ISBN";
+        public decimal? Price { get; set; }
     }
 }

@@ -19,7 +19,8 @@ namespace EFCore_DataAccess.Migrations
                 columns: table => new
                 {
                     IDBook = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:Identity","2,2"),
                     Title = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ISBN = table.Column<string>(type: "longtext", nullable: false)

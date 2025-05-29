@@ -7,3 +7,4 @@ global using Catalog.API.Models;
 global using System.Collections;
 global using Marten.Linq.QueryHandlers;
 global using Catalog.API.Exceptions;
+global using FluentValidation;

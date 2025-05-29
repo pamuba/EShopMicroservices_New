@@ -19,5 +19,22 @@ namespace EFCore_DataAccess.Data
 
             //optionsBuilder.UseSqlServer("")
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Book>().Property(u=>u.Price).HasPrecision(10,5);
+
+            modelBuilder.Entity<Book>().HasData(
+                new Book { IDBook = 1, Title = "Advtures od Tintin", ISBN = "12345", Price = 100m },
+                new Book { IDBook = 2, Title = "Advtures od Tintin", ISBN = "12345", Price = 100m },
+                new Book { IDBook = 3, Title = "Advtures od Tintin", ISBN = "12345", Price = 100m }
+            );
+
+            var bookList = new Book[] {
+                new Book { IDBook = 4, Title = "Advtures od Tintin", ISBN = "12345", Price = 100m },
+                new Book { IDBook = 5, Title = "Advtures od Tintin", ISBN = "12345", Price = 100m },
+            };
+            modelBuilder.Entity<Book>().HasData(bookList);
+        }
     }
 }
