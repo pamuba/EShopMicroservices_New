@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BuildingBlocks.Exceptions
 {
-    public class InternalServerError:Exception
+    public class InternalServerErrorException:Exception
     {
-        public InternalServerError(string message):base(message) { }
-        public InternalServerError(string message, string details):base(message)
+        public InternalServerErrorException(string message):base(message) { }
+        public InternalServerErrorException(string message, string details):base(message)
         {
             Details = details;
         }

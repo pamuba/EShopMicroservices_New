@@ -12,7 +12,7 @@ namespace Catalog.API.Products.GetProductById
     {
         public async Task<GetProductByIdResult> Handle(GetProductByIdQuery query, CancellationToken cancellationToken)
         {
-            logger.LogInformation("GetProductsQueryHandler.Handle called with {@query}", query);
+            //logger.LogInformation("GetProductsQueryHandler.Handle called with {@query}", query);
             var product = await session.LoadAsync<Product>(query.id, cancellationToken);
 
             if(product == null)

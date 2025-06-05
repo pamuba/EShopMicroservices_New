@@ -30,7 +30,7 @@
             //}
 
 
-            logger.LogInformation("CreateProductCommandHandler.handle called with {@command}", command);
+            //logger.LogInformation("CreateProductCommandHandler.handle called with {@command}", command);
             //create a Product Entity from the Command Object
             var product = new Product
             {
