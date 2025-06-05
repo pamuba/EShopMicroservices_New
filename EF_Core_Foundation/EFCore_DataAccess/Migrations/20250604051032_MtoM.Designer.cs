@@ -3,6 +3,7 @@ using System;
 using EFCore_DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250604051032_MtoM")]
+    partial class MtoM
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,21 +168,6 @@ namespace EFCore_DataAccess.Migrations
                     b.ToTable("Fluent_Books");
                 });
 
-            modelBuilder.Entity("EFCore_Model.Models.Fluent_BookAuthorMap", b =>
-                {
-                    b.Property<int>("Book_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Author_Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Book_Id", "Author_Id");
-
-                    b.HasIndex("Author_Id");
-
-                    b.ToTable("Fluent_BookAuthorMap");
-                });
-
             modelBuilder.Entity("EFCore_Model.Models.Fluent_BookDetail", b =>
                 {
                     b.Property<int>("BookDetail_Id")
@@ -243,6 +231,21 @@ namespace EFCore_DataAccess.Migrations
                     b.ToTable("Publishers");
                 });
 
+            modelBuilder.Entity("Fluent_AuthorFluent_Book", b =>
+                {
+                    b.Property<int>("AuthorsAuthor_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BooksBook_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("AuthorsAuthor_Id", "BooksBook_Id");
+
+                    b.HasIndex("BooksBook_Id");
+
+                    b.ToTable("Fluent_AuthorFluent_Book");
+                });
+
             modelBuilder.Entity("EFCore_Model.Models.Book", b =>
                 {
                     b.HasOne("EFCore_Model.Models.Publisher", "Publisher")
@@ -295,25 +298,6 @@ namespace EFCore_DataAccess.Migrations
                     b.Navigation("Fluent_Publisher");
                 });
 
-            modelBuilder.Entity("EFCore_Model.Models.Fluent_BookAuthorMap", b =>
-                {
-                    b.HasOne("EFCore_Model.Models.Fluent_Author", "Fluent_Author")
-                        .WithMany("BookAuthors")
-                        .HasForeignKey("Author_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EFCore_Model.Models.Fluent_Book", "Fluent_Book")
-                        .WithMany("BookAuthors")
-                        .HasForeignKey("Book_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Fluent_Author");
-
-                    b.Navigation("Fluent_Book");
-                });
-
             modelBuilder.Entity("EFCore_Model.Models.Fluent_BookDetail", b =>
                 {
                     b.HasOne("EFCore_Model.Models.Fluent_Book", "Fluent_Book")
@@ -323,6 +307,21 @@ namespace EFCore_DataAccess.Migrations
                         .IsRequired();
 
                     b.Navigation("Fluent_Book");
+                });
+
+            modelBuilder.Entity("Fluent_AuthorFluent_Book", b =>
+                {
+                    b.HasOne("EFCore_Model.Models.Fluent_Author", null)
+                        .WithMany()
+                        .HasForeignKey("AuthorsAuthor_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EFCore_Model.Models.Fluent_Book", null)
+                        .WithMany()
+                        .HasForeignKey("BooksBook_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EFCore_Model.Models.Author", b =>
@@ -337,15 +336,8 @@ namespace EFCore_DataAccess.Migrations
                     b.Navigation("BookDetail");
                 });
 
-            modelBuilder.Entity("EFCore_Model.Models.Fluent_Author", b =>
-                {
-                    b.Navigation("BookAuthors");
-                });
-
             modelBuilder.Entity("EFCore_Model.Models.Fluent_Book", b =>
                 {
-                    b.Navigation("BookAuthors");
-
                     b.Navigation("BookDetail");
                 });
 

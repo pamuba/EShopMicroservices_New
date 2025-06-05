@@ -18,6 +18,8 @@ namespace EFCore_Model.Models
 
         public Fluent_Publisher? Fluent_Publisher { get; set; }
 
-        //public List<Fluent_BookAuthorMap>? BookAuthors { get; set; }
+        //public List<Fluent_Author>? Authors { get; set; }
+
+        public List<Fluent_BookAuthorMap>? BookAuthors { get; set; }
     }
 }
