@@ -19,15 +19,20 @@ namespace EFCore_DataAccess.Data
         public DbSet<Fluent_Publisher> Fluent_Publishers { get; set; }
         public DbSet<Fluent_BookAuthorMap> Fluent_BookAuthorMap { get; set; }
 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
+        {
+            
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
+            //base.OnConfiguring(optionsBuilder);
 
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
-            optionsBuilder.UseMySql(
-                "server=127.0.0.1;uid=root;pwd=root@39;database=ecommerce3",
-                serverVersion
-                ).LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name}, LogLevel.Information );
+            //var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
+            //optionsBuilder.UseMySql(
+            //    "server=127.0.0.1;uid=root;pwd=root@39;database=ecommerce3",
+            //    serverVersion
+            //    ).LogTo(Console.WriteLine, new[] { DbLoggerCategory.Database.Command.Name }, LogLevel.Information);
 
             //optionsBuilder.UseSqlServer("")
         }
